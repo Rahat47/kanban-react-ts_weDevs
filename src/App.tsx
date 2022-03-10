@@ -1,11 +1,39 @@
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Loading } from "./components";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const BoardPage = lazy(() => import("./pages/BoardPage"));
+
 function App() {
     return (
-        <div className="grid h-screen  place-items-center">
-            <h1 className="p-4 font-body text-6xl font-extrabold text-primary-black">
-                Project Kanban Board
-            </h1>
-            <p className="font-text text-primary-black">Work in progress...</p>
-        </div>
+        <main>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <Suspense
+                            fallback={
+                                <Loading message="Loading Greatness..." />
+                            }
+                        >
+                            <HomePage />
+                        </Suspense>
+                    }
+                />
+
+                <Route
+                    path="/board"
+                    element={
+                        <Suspense
+                            fallback={<Loading message="Loading Board..." />}
+                        >
+                            <BoardPage />
+                        </Suspense>
+                    }
+                />
+            </Routes>
+        </main>
     );
 }
 
