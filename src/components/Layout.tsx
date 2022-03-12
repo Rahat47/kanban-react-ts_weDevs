@@ -6,8 +6,8 @@ const Layout: FC = ({ children }) => {
     return (
         <>
             <SidebarWrapper>
-                <Outlet />
                 {children}
+                <Outlet />
             </SidebarWrapper>
         </>
     );

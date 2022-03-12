@@ -28,7 +28,7 @@ const SidebarMobile: FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+                    <Dialog.Overlay className="fixed inset-0 bg-gray-700 bg-opacity-75" />
                 </Transition.Child>
                 <Transition.Child
                     as={Fragment}
@@ -81,6 +81,7 @@ const SidebarMobile: FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
                                             )
                                         }
                                         end
+                                        onClick={() => setSidebarOpen(false)}
                                     >
                                         {({ isActive }) => (
                                             <>

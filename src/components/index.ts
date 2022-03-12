@@ -5,3 +5,4 @@ export { default as SidebarWrapper } from "./SidebarWrapper";
 export { default as SidebarMobile } from "./SidebarMobile";
 export { default as Navbar } from "./Navbar";
 export { default as LazyRender } from "./LazyRender";
+export { default as CardContainer } from "./CardContainer";
