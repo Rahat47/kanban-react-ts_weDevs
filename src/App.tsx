@@ -1,9 +1,6 @@
-import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Loading } from "./components";
-
-const HomePage = lazy(() => import("./pages/HomePage"));
-const BoardPage = lazy(() => import("./pages/BoardPage"));
+import { Layout, LazyRender } from "./components";
+import { HomePage, Board } from "./pages";
 
 function App() {
     return (
@@ -12,26 +9,26 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        <Suspense
-                            fallback={
-                                <Loading message="Loading Greatness..." />
-                            }
-                        >
+                        <LazyRender>
                             <HomePage />
-                        </Suspense>
+                        </LazyRender>
                     }
                 />
 
-                <Route
-                    path="/board"
-                    element={
-                        <Suspense
-                            fallback={<Loading message="Loading Board..." />}
-                        >
-                            <BoardPage />
-                        </Suspense>
-                    }
-                />
+                <Route path="/board" element={<Layout />}>
+                    <Route
+                        index
+                        element={
+                            <LazyRender loadingMessage="Loading Board...">
+                                <Board />
+                            </LazyRender>
+                        }
+                    />
+                    <Route path="team" element={<h1>Teams</h1>} />
+                    <Route path="projects" element={<h1>Projects</h1>} />
+
+                    <Route path="*" element={<h1>404</h1>} />
+                </Route>
             </Routes>
         </main>
     );
