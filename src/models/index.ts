@@ -8,5 +8,4 @@ export interface Card {
     id: string;
     title: string;
     completed: boolean;
-    important: boolean;
 }

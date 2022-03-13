@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { List } from "../../models";
+import type { Card, List } from "../../models";
 import { RootState } from "../store";
 import { nanoid } from "nanoid";
 
@@ -44,10 +44,22 @@ export const listSlice = createSlice({
                 cards: [],
             });
         },
+
+        addCardToList: (
+            state,
+            action: PayloadAction<{ id: string; card: Card }>
+        ) => {
+            const list = state.value.find(
+                list => list.id === action.payload.id
+            );
+            if (list) {
+                list.cards.push(action.payload.card);
+            }
+        },
     },
 });
 
-export const { addList, removeList, renameList, createNewList } =
+export const { addList, removeList, renameList, createNewList, addCardToList } =
     listSlice.actions;
 
 export const selectLists = (state: RootState): List[] => state.lists.value;

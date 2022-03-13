@@ -9,3 +9,4 @@ export { default as CardContainer } from "./CardContainer";
 export { default as EmptyCard } from "./EmptyCard";
 export { default as Input } from "./Input";
 export { default as ListCard } from "./ListCard";
+export { default as AddNewTask } from "./AddNewTask";
