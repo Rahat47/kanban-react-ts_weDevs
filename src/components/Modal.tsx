@@ -1,29 +1,22 @@
 import React, { FC, Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
-import { useAppDispatch } from "../redux/hooks/hooks";
-import { removeList } from "../redux/features/listSlice";
 
 type Props = {
     isDialogOpen: boolean;
     setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    listId: string;
-    listName: string;
+    customMessage?: string;
+    customHeader?: string;
+    deleteAction: () => void;
 };
 
 const Modal: FC<Props> = ({
     isDialogOpen,
     setIsDialogOpen,
-    listId,
-    listName,
+    customMessage,
+    deleteAction,
+    customHeader,
 }) => {
-    const dispatch = useAppDispatch();
-
-    const handleDelete = () => {
-        dispatch(removeList(listId));
-        setIsDialogOpen(false);
-    };
-
     const cancelButtonRef = useRef(null);
 
     return (
@@ -76,19 +69,13 @@ const Modal: FC<Props> = ({
                                             as="h3"
                                             className="text-lg font-medium leading-6 text-gray-900"
                                         >
-                                            Delete List
+                                            {customHeader || "Are you sure?"}
                                         </Dialog.Title>
                                         <div className="mt-2">
                                             <p className="text-sm text-gray-500">
-                                                Are you sure you want to Delete
-                                                the list{" "}
-                                                <span className="text-lg font-bold text-primary-black">
-                                                    {listName}
-                                                </span>{" "}
-                                                ? All of your data will be
-                                                permanently removed from the
-                                                list. This action cannot be
-                                                undone.
+                                                {customMessage
+                                                    ? customMessage
+                                                    : `Are you sure you want to delete the list? This action cannot be undone.`}
                                             </p>
                                         </div>
                                     </div>
@@ -98,7 +85,7 @@ const Modal: FC<Props> = ({
                                 <button
                                     type="button"
                                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                                    onClick={handleDelete}
+                                    onClick={deleteAction}
                                 >
                                     Delete
                                 </button>

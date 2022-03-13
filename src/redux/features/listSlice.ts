@@ -59,10 +59,10 @@ export const listSlice = createSlice({
 
         removeCardFromList: (
             state,
-            action: PayloadAction<{ id: string; cardId: string }>
+            action: PayloadAction<{ listId: string; cardId: string }>
         ) => {
             const list = state.value.find(
-                list => list.id === action.payload.id
+                list => list.id === action.payload.listId
             );
             if (list) {
                 list.cards = list.cards.filter(

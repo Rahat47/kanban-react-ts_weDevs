@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
 import { Card } from "../models";
-import { PencilAltIcon } from "@heroicons/react/solid";
+import { PencilAltIcon, XIcon } from "@heroicons/react/solid";
 import { Input } from ".";
 import { useAppDispatch } from "../redux/hooks/hooks";
-import { editCardTitle } from "../redux/features/listSlice";
+import { editCardTitle, removeCardFromList } from "../redux/features/listSlice";
+import Modal from "./Modal";
 
 type Props = {
     item: Card;
@@ -16,6 +17,7 @@ const ListItem: FC<Props> = ({ item, listId }) => {
 
     const [editing, setEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
+    const [showModal, setShowModal] = useState(false);
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -28,6 +30,11 @@ const ListItem: FC<Props> = ({ item, listId }) => {
                 title: newTitle,
             })
         );
+    };
+
+    const removeHandler = () => {
+        dispatch(removeCardFromList({ cardId: id, listId: listId }));
+        setShowModal(false);
     };
 
     return (
@@ -48,14 +55,26 @@ const ListItem: FC<Props> = ({ item, listId }) => {
                             {title}
                         </p>
                     </div>
-                    <div>
+                    <div className="flex items-center space-x-2">
                         <PencilAltIcon
                             className="h-4 w-4"
                             onClick={() => setEditing(true)}
                         />
+
+                        <XIcon
+                            className="h-4 w-4"
+                            onClick={() => setShowModal(true)}
+                        />
                     </div>
                 </>
             )}
+
+            <Modal
+                isDialogOpen={showModal}
+                setIsDialogOpen={setShowModal}
+                deleteAction={removeHandler}
+                customMessage="Are you sure you want to remove this task? This action cannot be undone."
+            />
         </div>
     );
 };

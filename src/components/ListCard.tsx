@@ -3,15 +3,22 @@ import { List } from "../models";
 import { XIcon } from "@heroicons/react/solid";
 import { AiOutlineDrag } from "react-icons/ai";
 import { AddNewTask, ListItem, Modal } from ".";
+import { useAppDispatch } from "../redux/hooks/hooks";
+import { removeList } from "../redux/features/listSlice";
 
 type Props = {
     list: List;
 };
 
 const ListCard: FC<Props> = ({ list }) => {
+    const dispatch = useAppDispatch();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { cards } = list;
 
+    const handleDelete = () => {
+        dispatch(removeList(list.id));
+        setIsDialogOpen(false);
+    };
     return (
         <>
             <div className="rounded-md border border-gray-200 bg-gray-100 px-4 py-5 shadow-lg transition ">
@@ -56,8 +63,7 @@ const ListCard: FC<Props> = ({ list }) => {
             <Modal
                 setIsDialogOpen={setIsDialogOpen}
                 isDialogOpen={isDialogOpen}
-                listId={list.id}
-                listName={list.title}
+                deleteAction={handleDelete}
             />
         </>
     );
