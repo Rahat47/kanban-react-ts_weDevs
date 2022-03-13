@@ -1,6 +1,10 @@
-import { CardContainer } from "../components";
+import { CardContainer, EmptyCard, ListCard } from "../components";
+import { selectLists } from "../redux/features/listSlice";
+import { useAppSelector } from "../redux/hooks/hooks";
 
 const Board = () => {
+    const lists = useAppSelector(state => selectLists(state));
+
     return (
         <div className="flex-1">
             <div className="py-6">
@@ -12,11 +16,15 @@ const Board = () => {
                 <div className="px-4 sm:px-6 md:px-0">
                     {/*Need to create the kanban board here */}
                     <CardContainer>
-                        <h1>Card 1</h1>
-                        <h1>Card 1</h1>
-                        <h1>Card 1</h1>
-                        <h1>Card 1</h1>
-                        <h1>Card 1</h1>
+                        {lists.length ? (
+                            lists.map(list => (
+                                <ListCard list={list} key={list.id} />
+                            ))
+                        ) : (
+                            <EmptyCard />
+                        )}
+
+                        {lists.length > 0 && <EmptyCard />}
                     </CardContainer>
                 </div>
             </div>

@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { GradientContainer } from "../components";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+    const navigate = useNavigate();
+
     return (
         <GradientContainer>
             <div>
@@ -14,7 +17,9 @@ const HomePage = () => {
                 </p>
             </div>
 
-            <button className="my-10 rounded-full bg-primary-black py-4 px-8 font-bold text-white transition-all hover:bg-primary-black/90">
+            <button
+                onClick={() => navigate("/board")}
+            className="my-10 rounded-full bg-primary-black py-4 px-8 font-bold text-white transition-all hover:bg-primary-black/90">
                 <Link to="/board">Explore Now</Link>
             </button>
         </GradientContainer>

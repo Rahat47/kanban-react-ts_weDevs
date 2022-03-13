@@ -1,11 +1,11 @@
 export interface List {
-    id: number;
+    id: string;
     title: string;
     cards: Card[];
 }
 
 export interface Card {
-    id: number;
+    id: string;
     title: string;
     completed: boolean;
     important: boolean;
