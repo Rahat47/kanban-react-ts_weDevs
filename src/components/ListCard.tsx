@@ -1,9 +1,8 @@
 import { FC, useState } from "react";
 import { List } from "../models";
-import { XIcon, PencilAltIcon } from "@heroicons/react/solid";
+import { XIcon } from "@heroicons/react/solid";
 import { AiOutlineDrag } from "react-icons/ai";
-import Modal from "./Modal";
-import AddNewTask from "./AddNewTask";
+import { AddNewTask, ListItem, Modal } from ".";
 
 type Props = {
     list: List;
@@ -48,9 +47,7 @@ const ListCard: FC<Props> = ({ list }) => {
                                 key={card.id}
                                 className="flex cursor-pointer items-center justify-between overflow-hidden bg-white px-4 py-3 shadow transition duration-200 hover:shadow-md sm:rounded-md"
                             >
-                                <p>{card.title}</p>
-
-                                <PencilAltIcon className="h-5 w-5 text-primary-black/50" />
+                                <ListItem listId={list.id} item={card} />
                             </li>
                         ))}
                 </ul>

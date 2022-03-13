@@ -10,3 +10,5 @@ export { default as EmptyCard } from "./EmptyCard";
 export { default as Input } from "./Input";
 export { default as ListCard } from "./ListCard";
 export { default as AddNewTask } from "./AddNewTask";
+export { default as ListItem } from "./ListItem";
+export { default as Modal } from "./Modal";

@@ -56,11 +56,53 @@ export const listSlice = createSlice({
                 list.cards.push(action.payload.card);
             }
         },
+
+        removeCardFromList: (
+            state,
+            action: PayloadAction<{ id: string; cardId: string }>
+        ) => {
+            const list = state.value.find(
+                list => list.id === action.payload.id
+            );
+            if (list) {
+                list.cards = list.cards.filter(
+                    card => card.id !== action.payload.cardId
+                );
+            }
+        },
+
+        editCardTitle: (
+            state,
+            action: PayloadAction<{
+                listId: string;
+                cardId: string;
+                title: string;
+            }>
+        ) => {
+            const list = state.value.find(
+                list => list.id === action.payload.listId
+            );
+            if (list) {
+                const card = list.cards.find(
+                    card => card.id === action.payload.cardId
+                );
+                if (card) {
+                    card.title = action.payload.title;
+                }
+            }
+        },
     },
 });
 
-export const { addList, removeList, renameList, createNewList, addCardToList } =
-    listSlice.actions;
+export const {
+    addList,
+    removeList,
+    renameList,
+    createNewList,
+    addCardToList,
+    removeCardFromList,
+    editCardTitle,
+} = listSlice.actions;
 
 export const selectLists = (state: RootState): List[] => state.lists.value;
 
