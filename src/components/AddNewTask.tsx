@@ -14,7 +14,6 @@ const AddNewTask: FC<Props> = ({ listId }) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("submitted");
         setTaskName("");
 
         const data: Card = {

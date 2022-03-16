@@ -1,6 +1,11 @@
 import React, { FC, useState } from "react";
 import { Card } from "../models";
-import { PencilAltIcon, XIcon } from "@heroicons/react/solid";
+import {
+    PencilAltIcon,
+    XIcon,
+    LockClosedIcon,
+    LockOpenIcon,
+} from "@heroicons/react/solid";
 import { Input } from ".";
 import { useAppDispatch } from "../redux/hooks/hooks";
 import { editCardTitle, removeCardFromList } from "../redux/features/listSlice";
@@ -17,6 +22,8 @@ const ListItem: FC<Props> = ({ item, listId }) => {
     const dispatch = useAppDispatch();
 
     const [editing, setEditing] = useState(false);
+    const [locked, setLocked] = useState(false);
+
     const [newTitle, setNewTitle] = useState(title);
     const [showModal, setShowModal] = useState(false);
 
@@ -71,14 +78,17 @@ const ListItem: FC<Props> = ({ item, listId }) => {
 
     return (
         <li
-            draggable={!editing}
+            draggable={!locked}
             onDragStart={dragStartHandler}
             onDragEnd={dragEndHandler}
             onDragOver={dragOverHandler}
             className={classNames(
-                "flex cursor-move items-center justify-between overflow-hidden bg-white px-4 py-3 shadow transition duration-200 hover:shadow-md sm:rounded-md ",
+                "flex cursor-move items-center justify-between overflow-hidden bg-white px-4 py-3 shadow transition duration-200 hover:shadow-md sm:rounded-md",
                 {
                     "bg-gray-100 opacity-50": dragging,
+                },
+                {
+                    "cursor-pointer bg-slate-200": locked,
                 }
             )}
         >
@@ -102,6 +112,18 @@ const ListItem: FC<Props> = ({ item, listId }) => {
                             </p>
                         </div>
                         <div className="flex cursor-pointer items-center space-x-2">
+                            {locked ? (
+                                <LockClosedIcon
+                                    className="h-4 w-4"
+                                    onClick={() => setLocked(false)}
+                                />
+                            ) : (
+                                <LockOpenIcon
+                                    className="h-4 w-4"
+                                    onClick={() => setLocked(true)}
+                                />
+                            )}
+
                             <PencilAltIcon
                                 className="h-4 w-4"
                                 onClick={() => setEditing(true)}
