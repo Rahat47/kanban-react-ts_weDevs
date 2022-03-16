@@ -26,7 +26,7 @@ const EmptyCard = () => {
         <form onSubmit={handleSubmit}>
             <button
                 type="button"
-                className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-black focus:ring-offset-2"
+                className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-8 text-center hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-black focus:ring-offset-2"
                 onClick={handleClick}
             >
                 <RiMenuAddLine className="mx-auto my-2 h-10 w-10 text-gray-500" />

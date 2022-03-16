@@ -91,6 +91,33 @@ export const listSlice = createSlice({
                 }
             }
         },
+
+        transferCardFromList: (
+            state,
+            action: PayloadAction<{
+                listId: string;
+                cardId: string;
+                newListId: string;
+            }>
+        ) => {
+            const { listId, newListId, cardId } = action.payload;
+
+            if (listId === newListId) return;
+
+            const list = state.value.find(list => list.id === listId);
+            if (list) {
+                const card = list.cards.find(card => card.id === cardId);
+                if (card) {
+                    list.cards = list.cards.filter(card => card.id !== cardId);
+                    const newList = state.value.find(
+                        list => list.id === newListId
+                    );
+                    if (newList) {
+                        newList.cards.push(card);
+                    }
+                }
+            }
+        },
     },
 });
 
@@ -102,6 +129,7 @@ export const {
     addCardToList,
     removeCardFromList,
     editCardTitle,
+    transferCardFromList,
 } = listSlice.actions;
 
 export const selectLists = (state: RootState): List[] => state.lists.value;
