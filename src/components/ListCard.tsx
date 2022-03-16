@@ -125,7 +125,7 @@ const ListCard: FC<Props> = ({ list }) => {
                 </div>
 
                 <ul
-                    className="mt-4 min-h-full space-y-3"
+                    className="mt-4 min-h-full space-y-3 "
                     onDrop={dropHandler}
                     onDragOver={dragOverHandler}
                     onDragLeave={dragLeaveHandler}
