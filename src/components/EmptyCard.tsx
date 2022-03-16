@@ -13,6 +13,14 @@ const EmptyCard = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        createList();
+    };
+
+    const createList = () => {
+        if (!title.trim()) {
+            return;
+        }
+
         dispatch(createNewList(title));
         setEditing(false);
         setTitle("");
@@ -49,6 +57,7 @@ const EmptyCard = () => {
                         name="list_title"
                         value={title}
                         onChange={e => setTitle(e.target.value)}
+                        onBlur={createList}
                     />
                 </Transition>
             </button>

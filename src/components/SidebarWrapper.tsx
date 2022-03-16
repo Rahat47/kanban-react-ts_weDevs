@@ -57,7 +57,6 @@ const SidebarWrapper: FC = ({ children }) => {
                 <div className="mx-auto flex  flex-col md:px-8 xl:px-8">
                     <Navbar setSidebarOpen={setSidebarOpen} />
 
-                    {/* Contents Will Render Here */}
                     {children}
                 </div>
             </div>

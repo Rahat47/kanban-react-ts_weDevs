@@ -19,7 +19,8 @@ const HomePage = () => {
 
             <button
                 onClick={() => navigate("/board")}
-            className="my-10 rounded-full bg-primary-black py-4 px-8 font-bold text-white transition-all hover:bg-primary-black/90">
+                className="my-10 rounded-full bg-primary-black py-4 px-8 font-bold text-white transition-all hover:bg-primary-black/90"
+            >
                 <Link to="/board">Explore Now</Link>
             </button>
         </GradientContainer>

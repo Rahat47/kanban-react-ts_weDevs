@@ -14,7 +14,6 @@ const Board = () => {
                     </h1>
                 </div>
                 <div className="px-4 sm:px-6 md:px-0">
-                    {/*Need to create the kanban board here */}
                     <CardContainer>
                         {lists.length ? (
                             lists.map(list => (
